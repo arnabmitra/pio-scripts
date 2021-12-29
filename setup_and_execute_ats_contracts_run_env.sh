@@ -2,7 +2,7 @@
 
 PROVENANCE_DEV_DIR=~/provenance
 COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id chain-local --keyring-backend test --yes -o json"
-COMMON_TX_WITH_FEES_FLAGS="--fees 382199010nhash,188gwei --chain-id chain-local --keyring-backend test --yes -o json"
+COMMON_TX_WITH_FEES_FLAGS="--fees 382199010nhash,198gwei --chain-id chain-local --keyring-backend test --yes -o json"
 
 ######################################### SETUP FOR ATS CONTRACT EXECUTION ##############################################
 

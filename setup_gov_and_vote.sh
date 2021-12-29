@@ -9,7 +9,7 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################### SETUP FOR GOV PROPOSAL ##############################################
 
-   ${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding" "adding marker fees" 15000000000nhash \
+   ${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding" "adding send fees" 15000000000nhash \
     --msg-type=/cosmos.bank.v1beta1.MsgSend --additional-fee 99gwei  \
 		--from node0 \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
