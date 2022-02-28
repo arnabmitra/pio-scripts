@@ -108,7 +108,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t  tx name bind \
 #
 echo "Storing, instantiating, and executing ats contract"
 ${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/node0 \
-    tx wasm store wasms/ats_smart_contract.wasm  \
+    tx wasm store wasms/ats_smart_contract1-8.wasm  \
     --from node0 \
     ${COMMON_TX_FLAGS} | jq
 
