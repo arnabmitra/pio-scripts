@@ -9,7 +9,8 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################### SETUP FOR GOV PROPOSAL ##############################################
 
-   ${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding" "adding send fees" 15000000000nhash \
+  # shellcheck disable=SC2037
+  GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding" "adding send fees" 15000000000nhash \
     --msg-type=/cosmos.bank.v1beta1.MsgSend --additional-fee 99gwei  \
 		--from node0 \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
@@ -19,9 +20,12 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
       --gas 150000 \
     --broadcast-mode block \
     --yes \
-    --testnet
+    --testnet -o json| jq '.logs[ ] .events[] | select(.type=="submit_proposal") .attributes[]| select(.key=="proposal_id") .value')
+GOV_PROP=$(sed -e 's/^"//' -e 's/"$//' <<<"$GOV_PROP")
+# shellcheck disable=SC2086
+printf $GOV_PROP
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 	--from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \
@@ -32,7 +36,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
   --yes \
   --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 --from node1 \
 --home ${PROVENANCE_DEV_DIR}/build/node1 \
 --chain-id chain-local \
@@ -43,7 +47,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
 --yes \
 --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 --from node2 \
 --home ${PROVENANCE_DEV_DIR}/build/node2 \
 --chain-id chain-local \
@@ -54,7 +58,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
 --yes \
 --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote "$GOV_PROP" yes \
 --from node3 \
 --home ${PROVENANCE_DEV_DIR}/build/node3 \
 --chain-id chain-local \

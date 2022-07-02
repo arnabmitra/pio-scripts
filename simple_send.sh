@@ -14,7 +14,7 @@ do
   1000000000000nhash \
   --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
-  --keyring-backend test --chain-id chain-local --gas 40000000000 --gas-prices 1905nhash  --yes \
-  --testnet -o json | jq
+  --keyring-backend test --chain-id chain-local --gas auto --gas-adjustment 2  --gas-prices 1905nhash  \
+  --testnet --yes -o json | jq
   x=$(( x+1 ))
 done

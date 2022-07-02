@@ -1,0 +1,7 @@
+provenanced -t tx staking delegate tpvaloper12p0d7u6axqnnt4szs9fxwf3qv67k25rc54pw0f \
+10000000000000000nhash --gas-prices 1905nhash --gas 187000 --chain-id chain-local  \
+           --from node0 \
+           --keyring-backend test \
+           --home build/node0 \
+            --broadcast-mode block \
+           --yes
