@@ -10,58 +10,61 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################## SETUP FOR GOV PROPOSAL ##############################################
 
-${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-proposal param-change ~/pio-scratch/param-change-proposal.json \
-     --from node0 \
-     --home ${PROVENANCE_DEV_DIR}/build/node0 \
-     --chain-id chain-local \
- 		 --keyring-backend test \
-     --fees 1000000000nhash  \
-     --gas auto \
-     --gas-adjustment 2 \
-     --broadcast-mode block \
-     --yes \
-     --testnet
-
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
-	--from node0 \
+GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-proposal param-change ./param-change-proposal.json \
+  --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \
-	--keyring-backend test \
-    --gas-prices 1905nhash \
-        --gas 150000 \
+  --keyring-backend test \
+  --fees 1000000000nhash \
+  --gas auto \
+  --gas-adjustment 2 \
+  --broadcast-mode block \
+  --yes \
+  --testnet -o json | jq '.logs[ ] .events[] | select(.type=="submit_proposal") .attributes[]| select(.key=="proposal_id") .value')
+GOV_PROP=$(sed -e 's/^"//' -e 's/"$//' <<<"$GOV_PROP")
+# shellcheck disable=SC2086
+printf $GOV_PROP
+
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
+  --from node0 \
+  --home ${PROVENANCE_DEV_DIR}/build/node0 \
+  --chain-id chain-local \
+  --keyring-backend test \
+  --gas-prices 1905nhash \
+  --gas 150000 \
   --broadcast-mode block \
   --yes \
   --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
---from node1 \
---home ${PROVENANCE_DEV_DIR}/build/node1 \
---chain-id chain-local \
---keyring-backend test \
- --gas-prices 1905nhash \
-        --gas 150000 \
---broadcast-mode block \
---yes \
---testnet
-
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
---from node2 \
---home ${PROVENANCE_DEV_DIR}/build/node2 \
---chain-id chain-local \
---keyring-backend test \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
+  --from node1 \
+  --home ${PROVENANCE_DEV_DIR}/build/node1 \
+  --chain-id chain-local \
+  --keyring-backend test \
   --gas-prices 1905nhash \
-      --gas 150000 \
---broadcast-mode block \
---yes \
---testnet
+  --gas 150000 \
+  --broadcast-mode block \
+  --yes \
+  --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote 1 yes \
---from node3 \
---home ${PROVENANCE_DEV_DIR}/build/node3 \
---chain-id chain-local \
---keyring-backend test \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
+  --from node2 \
+  --home ${PROVENANCE_DEV_DIR}/build/node2 \
+  --chain-id chain-local \
+  --keyring-backend test \
   --gas-prices 1905nhash \
-      --gas 150000 \
---broadcast-mode block \
---yes \
---testnet
+  --gas 150000 \
+  --broadcast-mode block \
+  --yes \
+  --testnet
+
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote "$GOV_PROP" yes \
+  --from node3 \
+  --home ${PROVENANCE_DEV_DIR}/build/node3 \
+  --chain-id chain-local \
+  --keyring-backend test \
+  --gas-prices 1905nhash \
+  --gas 150000 \
+  --broadcast-mode block \
+  --yes \
+  --testnet
