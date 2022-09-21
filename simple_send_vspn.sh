@@ -10,11 +10,11 @@ do
 
  ${PROVENANCE_DEV_DIR}/build/provenanced tx bank send \
   $(${PROVENANCE_DEV_DIR}/build/provenanced keys show -a node0 --home ${PROVENANCE_DEV_DIR}/build/node0 --keyring-backend test --testnet) \
-  $(${PROVENANCE_DEV_DIR}/build/provenanced keys show -a ownermarker --home ${PROVENANCE_DEV_DIR}/build/node0 --keyring-backend test --testnet) \
-  1000000000000nhash \
+  tp1t6urmuke2r2qnv23ts0t3qjp65ffp2vc529y0j \
+  1000000000vspn \
   --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
-  --keyring-backend test --chain-id chain-local --gas auto --gas-adjustment 2  --gas-prices 1905nhash  \
+  --keyring-backend test --chain-id chain-local --gas auto --gas-adjustment 2  --fees 0vspn  \
   --testnet --yes -o json | jq
   x=$(( x+1 ))
 done

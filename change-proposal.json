@@ -1,0 +1,12 @@
+{
+  "title": "Memo change param",
+  "description": "Update default memo length",
+  "changes": [
+    {
+      "subspace": "auth",
+      "key": "max_memo_characters",
+      "value": "256"
+    }
+  ],
+  "deposit": "50000_000_000_000nhash"
+}
