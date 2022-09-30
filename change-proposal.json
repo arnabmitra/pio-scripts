@@ -1,9 +1,9 @@
 {
-  "title": "Memo change param",
-  "description": "Update default memo length",
+  "title": "marker change param",
+  "description": "Update marker denom",
   "changes": [
     {
-      "subspace": "auth",
+      "subspace": "marker",
       "key": "max_memo_characters",
       "value": "256"
     }
