@@ -21,7 +21,7 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 #    --broadcast-mode block \
 #    --yes \
 #    --testnet -o json| jq '.logs[ ] .events[] | select(.type=="submit_proposal") .attributes[]| select(.key=="proposal_id") .value')
-GOV_PROP=2
+GOV_PROP=5
 # shellcheck disable=SC2086
 printf $GOV_PROP
 
@@ -30,8 +30,8 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \
 	--keyring-backend test \
-    --gas-prices 1905nhash \
-        --gas 150000 \
+  --gas auto \
+  --gas-adjustment 1.5 \
   --broadcast-mode block \
   --yes \
   --testnet
@@ -41,8 +41,8 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 --home ${PROVENANCE_DEV_DIR}/build/node1 \
 --chain-id chain-local \
 --keyring-backend test \
- --gas-prices 1905nhash \
-        --gas 150000 \
+--gas auto \
+--gas-adjustment 1.5 \
 --broadcast-mode block \
 --yes \
 --testnet
@@ -52,19 +52,19 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 --home ${PROVENANCE_DEV_DIR}/build/node2 \
 --chain-id chain-local \
 --keyring-backend test \
-  --gas-prices 1905nhash \
-      --gas 150000 \
+--gas auto \
+--gas-adjustment 1.5 \
 --broadcast-mode block \
 --yes \
 --testnet
 
 ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote "$GOV_PROP" yes \
---from node3 \
---home ${PROVENANCE_DEV_DIR}/build/node3 \
---chain-id chain-local \
---keyring-backend test \
-  --gas-prices 1905nhash \
-      --gas 150000 \
---broadcast-mode block \
---yes \
---testnet
+ --from node3 \
+ --home ${PROVENANCE_DEV_DIR}/build/node3 \
+ --chain-id chain-local \
+ --keyring-backend test \
+ --gas auto \
+ --gas-adjustment 1.5 \
+ --broadcast-mode block \
+ --yes \
+ --testnet

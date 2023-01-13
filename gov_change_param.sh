@@ -10,7 +10,7 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################## SETUP FOR GOV PROPOSAL ##############################################
 
-GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-proposal param-change ./param-change-proposal.json \
+GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-legacy-proposal param-change ./param-change-proposal.json \
   --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \

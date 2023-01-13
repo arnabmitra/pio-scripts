@@ -15,46 +15,46 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 0vspn --gas-adjustment 2 --chain-id cha
   --testnet -o json | jq
 
 ${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/node0 \
-     tx marker new 0gwei \
+     tx marker new 0gweii \
     --type RESTRICTED \
     --from node0 \
     ${COMMON_TX_FLAGS} | jq
 
 ${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker grant \
     $(${PROVENANCE_DEV_DIR}/build/provenanced keys show -a node0 --home ${PROVENANCE_DEV_DIR}/build/node0 --keyring-backend test --testnet) \
-    gwei \
+    gweii \
     admin,burn,deposit,delete,mint,withdraw \
     --from node0 \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
     ${COMMON_TX_FLAGS} | jq
 
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker finalize gwei \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker finalize gweii \
     --from node0 \
     --keyring-backend test \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
      ${COMMON_TX_FLAGS} |jq
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t  tx marker activate gwei \
+${PROVENANCE_DEV_DIR}/build/provenanced -t  tx marker activate gweii \
     --from node0 \
     --keyring-backend test \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
     ${COMMON_TX_FLAGS} |jq
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker mint 200000gwei \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker mint 200000gweii \
     --from node0 \
     --keyring-backend test \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
      ${COMMON_TX_FLAGS} |jq
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker withdraw gwei 100000gwei $(provenanced keys show -a node0 --home ${PROVENANCE_DEV_DIR}/build/node0 --keyring-backend test --testnet) \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker withdraw gwei 100000gweii $(provenanced keys show -a node0 --home ${PROVENANCE_DEV_DIR}/build/node0 --keyring-backend test --testnet) \
         --from node0 \
         --keyring-backend test \
         --home ${PROVENANCE_DEV_DIR}/build/node0 \
      ${COMMON_TX_FLAGS} |jq
 
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker withdraw gwei 100000gwei tp1t6urmuke2r2qnv23ts0t3qjp65ffp2vc529y0j \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker withdraw gwei 100000gweii tp1t6urmuke2r2qnv23ts0t3qjp65ffp2vc529y0j \
         --from node0 \
         --keyring-backend test \
         --home ${PROVENANCE_DEV_DIR}/build/node0 \

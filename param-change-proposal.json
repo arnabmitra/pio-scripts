@@ -1,11 +1,11 @@
 {
-  "title": "Msg Fees Param Change",
-  "description": "Update default denom for msg fees",
+  "title": "MsgFee Param Change",
+  "description": "Update conversion denom to nhash",
   "changes": [
     {
       "subspace": "msgfees",
-      "key": "FloorGasPrice",
-      "value": {"denom":"nhash","amount":"99"}
+      "key": "ConversionFeeDenom",
+      "value": "nhash"
     }
   ],
   "deposit": "10000000000nhash"

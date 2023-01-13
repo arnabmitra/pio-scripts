@@ -1,0 +1,12 @@
+{
+  "title": "Marker Param Change",
+  "description": "Update default marker supply for marker",
+  "changes": [
+    {
+      "subspace": "marker",
+      "key": "MaxTotalSupply",
+      "value": "100000000000000000000"
+    }
+  ],
+  "deposit": "10000000000nhash"
+}

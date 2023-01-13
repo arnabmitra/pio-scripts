@@ -10,7 +10,9 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################## SETUP FOR GOV PROPOSAL ##############################################
 
-GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-proposal-legacy param-change ./param-change-proposal.json \
+GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding"  \
+   "MsgCreateGroup addition fee" 50000000nhash \
+  --msg-type=/cosmos.group.v1.MsgCreateGroup --additional-fee=612nhash \
   --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \
@@ -25,7 +27,7 @@ GOV_PROP=$(sed -e 's/^"//' -e 's/"$//' <<<"$GOV_PROP")
 # shellcheck disable=SC2086
 printf $GOV_PROP
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.0 \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
   --from node0 \
   --home ${PROVENANCE_DEV_DIR}/build/node0 \
   --chain-id chain-local \
@@ -36,7 +38,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.
   --yes \
   --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.0 \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
   --from node1 \
   --home ${PROVENANCE_DEV_DIR}/build/node1 \
   --chain-id chain-local \
@@ -47,7 +49,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.
   --yes \
   --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.0 \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
   --from node2 \
   --home ${PROVENANCE_DEV_DIR}/build/node2 \
   --chain-id chain-local \
@@ -58,7 +60,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote $GOV_PROP yes=1.
   --yes \
   --testnet
 
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov weighted-vote "$GOV_PROP" yes=1.0 \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote "$GOV_PROP" yes \
   --from node3 \
   --home ${PROVENANCE_DEV_DIR}/build/node3 \
   --chain-id chain-local \
