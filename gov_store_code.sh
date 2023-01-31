@@ -18,7 +18,7 @@ ${PROVENANCE_DEV_DIR}/build/provenanced tx gov submit-legacy-proposal wasm-store
   --keyring-backend test \
   --fees 100000000000nhash \
   --gas auto \
-  --gas-adjustment 2 \
+  --gas-adjustment 1.5 \
   --broadcast-mode block \
   --yes \
   --testnet -o json

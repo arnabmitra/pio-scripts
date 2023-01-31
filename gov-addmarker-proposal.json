@@ -1,0 +1,3 @@
+{"title":"test add marker","description":"description","manager":"tp13dy7y4cfwycvuxprx6884eetx4pen3kejl5ztx",
+  "amount":{"denom":"ibc/EFB36F294FBE1E2EAB0A2598715050B391C4A32CE9BFDC6C876B162352AFBE48","amount":"0"},"status":"MARKER_STATUS_ACTIVE","marker_type":1,
+  "supply_fixed":false,"allow_governance_control":true}

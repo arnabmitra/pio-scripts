@@ -9,21 +9,18 @@ COMMON_TX_FLAGS="--gas auto --gas-prices 1905nhash --gas-adjustment 2 --chain-id
 
 ######################################### SETUP FOR GOV PROPOSAL ##############################################
 
-   shellcheck disable=SC2037
-  GOV_PROP=$(${PROVENANCE_DEV_DIR}/build/provenanced -t tx msgfees proposal add "adding" "adding send fees" 15000000000nhash \
-    --msg-type=/cosmos.bank.v1beta1.MsgSend --additional-fee 99gwei  \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx marker proposal AddMarker ./gov-addmarker-proposal.json 15000000000nhash \
 		--from node0 \
     --home ${PROVENANCE_DEV_DIR}/build/node0 \
     --chain-id chain-local \
 		--keyring-backend test \
-      --gas-prices 1905nhash \
-      --gas 150000 \
+     --gas auto --gas-adjustment 1.4 --fees 100900352060nhash \
     --broadcast-mode block \
     --yes \
-    --testnet -o json| jq '.logs[ ] .events[] | select(.type=="submit_proposal") .attributes[]| select(.key=="proposal_id") .value')
-GOV_PROP=2
-# shellcheck disable=SC2086
-printf $GOV_PROP
+    --testnet -o json
+## shellcheck disable=SC2086
+#printf $GOV_PROP
+GOV_PROP=1
 
 ${PROVENANCE_DEV_DIR}/build/provenanced -t tx gov vote $GOV_PROP yes \
 	--from node0 \
