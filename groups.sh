@@ -3,7 +3,8 @@
 PROVENANCE_DEV_DIR=~/provenance
 
 
-provenanced --testnet keys add alice --hd-path="44'/1'/0'/0/0" --home ${PROVENANCE_DEV_DIR}/build/node0
+provenanced --testnet
+keys add alice --hd-path="44'/1'/0'/0/0" --home ${PROVENANCE_DEV_DIR}/build/node0
 provenanced --testnet keys add bob --hd-path="44'/1'/0'/0/0" --home ${PROVENANCE_DEV_DIR}/build/node0
 provenanced --testnet keys add chuck --hd-path="44'/1'/0'/0/0" --home ${PROVENANCE_DEV_DIR}/build/node0
 
