@@ -1,0 +1,17 @@
+		{
+			"messages": [
+				{
+					"@type": "/cosmos.bank.v1beta1.MsgSend",
+					"from_address": "tp1w40q3q7v26petw6g5stz5dt9xsezgnzalxgw8x",
+					"to_address": "tp15esneda3d7gd4hvj7pw74deycjgz9j7tpfzyrl",
+					"amount": [
+						{
+							"denom": "nhash",
+							"amount": "100000000000"
+						}
+					]
+				}
+				],
+			"metadata": "",
+			"deposit": "50000000nhash"
+		}
