@@ -12,7 +12,7 @@ printf '%s address chain 2: \n' "$ADDRESS_CHAIN_2"
 printf '%s address chain 1:\n' "$ADDRESS_CHAIN_1"
 #while [ $x -le 100 ]
 #do
-${PROVENANCE_DEV_DIR}/build/provenanced -t tx ibc-transfer transfer transfer channel-0 "${ADDRESS_CHAIN_2}" \
+${PROVENANCE_DEV_DIR}/build/provenanced -t tx ibc-transfer transfer transfer channel-0  --packet-timeout-height 0-253 "${ADDRESS_CHAIN_2}" \
 500nhash --from ibc0-0 --gas auto --gas-prices 1905nhash --gas-adjustment 1.5 \
 --home ${PROVENANCE_DEV_DIR}/build/ibc0-0/ --chain-id testing --node http://localhost:26657 -y -o json | jq
 sleep 10
