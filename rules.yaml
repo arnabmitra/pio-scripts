@@ -1,0 +1,16 @@
+rules:
+  # allow-list sending solana to all addresses in CUSTOMERS
+  - name: "DEFAULT_test_btc"
+    type: ALLOW
+    from:
+      kind: ACCOUNT
+      account: BTC_SILO
+    to:
+      kind: ACCOUNT
+      account: MySilo
+    asset:
+      kind: ASSET
+      # for native asset, the contract should be the same as the chain
+      contract: BTC
+      # this is the identifier for the chain Solana
+      chain: BTC
