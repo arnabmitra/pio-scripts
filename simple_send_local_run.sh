@@ -1,7 +1,14 @@
 #!/bin/bash
 x=1
 PROVENANCE_DEV_DIR=~/provenance-priv
-${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/run keys add ownermarker --recover --hd-path "44'/1'/0'/0/0'" --keyring-backend test < ./mnemonics/ownermarker.txt
+# Check if ownermarker key already exists before adding
+if ! ${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/run keys show ownermarker --keyring-backend test > /dev/null 2>&1; then
+    ${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/run keys add ownermarker --recover --hd-path "44'/1'/0'/0/0'" --keyring-backend test < ./mnemonics/ownermarker.txt
+    echo "Added ownermarker key"
+else
+    echo "ownermarker key already exists, skipping key addition"
+fi
+#${PROVENANCE_DEV_DIR}/build/provenanced -t --home ${PROVENANCE_DEV_DIR}/build/run keys add ownermarker --recover --hd-path "44'/1'/0'/0/0'" --keyring-backend test < ./mnemonics/ownermarker.txt
 COMMON_TX_FLAGS="--gas auto --gas-adjustment 2 --chain-id chain-local --keyring-backend test --yes -o json"
 
 while [ $x -le 3 ]
@@ -18,6 +25,7 @@ do
   x=$(( x+1 ))
 
   while true; do
+     sleep 3
       status=$(${PROVENANCE_DEV_DIR}/build/provenanced query tx $tx_hash --output json | jq -r '.code')
       if [ -z "$status" ]; then
           echo "Transaction $tx_hash is still pending..."
